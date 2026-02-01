@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { Suspense, useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
@@ -115,7 +115,7 @@ B.S. Graphic Design, State University (2016)
 SKILLS
 Figma, Sketch, Adobe XD, User Research, Prototyping, HTML/CSS`
 
-export default function ResumeBuilderPage() {
+function ResumeBuilderContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { isAuthenticated, loading: authLoading } = useAuth()
@@ -711,5 +711,13 @@ export default function ResumeBuilderPage() {
         message={upgradePromptMessage}
       />
     </div>
+  )
+}
+
+export default function ResumeBuilderPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background" />}>
+      <ResumeBuilderContent />
+    </Suspense>
   )
 }

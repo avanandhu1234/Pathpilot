@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { Suspense, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
@@ -18,7 +18,7 @@ const benefits = [
   "Career insights and guidance",
 ]
 
-export default function SignUpPage() {
+function SignUpContent() {
   const searchParams = useSearchParams()
   const next = searchParams.get("next") || "/"
   const { register } = useAuth()
@@ -267,5 +267,13 @@ export default function SignUpPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function SignUpPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background" />}>
+      <SignUpContent />
+    </Suspense>
   )
 }
