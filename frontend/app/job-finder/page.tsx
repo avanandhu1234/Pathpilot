@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { Suspense, useState, useEffect } from "react"
 import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Header } from "@/components/header"
@@ -28,7 +28,7 @@ const filters = [
   { label: "Salary Range", options: ["$50k+", "$80k+", "$100k+", "$150k+"] },
 ]
 
-export default function JobFinderPage() {
+function JobFinderContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { isAuthenticated, loading: authLoading } = useAuth()
@@ -304,5 +304,13 @@ export default function JobFinderPage() {
 
       <Footer />
     </div>
+  )
+}
+
+export default function JobFinderPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background" />}>
+      <JobFinderContent />
+    </Suspense>
   )
 }
