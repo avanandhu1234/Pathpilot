@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+bcrypt>=4.0.0
+python-jose[cryptography]
+httpx
+python-dotenv
+openai

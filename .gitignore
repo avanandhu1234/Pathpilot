@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+backend/.venv/
+frontend/.next/
+backend/__pycache__/
+frontend/backend/.venv/
+*.pyc
+.pnp
+.pnp.js
+.vscode
+
+# Env and secrets (never commit)
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env.local
+*.pem
+
+# Build and cache
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+.turbo/
+
+# IDE and OS
+.idea/
+.vscode/*
+!.vscode/launch.json
+.DS_Store
+Thumbs.db
+
+# Logs and debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# SQLite DB (optional: remove if you want to track a seed DB)
+*.db
+pathpilot.db
+
+# Vercel
+.vercel
+
+# Testing
+coverage/
+.nyc_output/
+.pytest_cache/
+htmlcov/
