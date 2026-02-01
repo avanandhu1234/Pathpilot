@@ -58,13 +58,21 @@ _CORS_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://127.0.0.1:3001",
 ]
+_frontend_origin = (os.environ.get("FRONTEND_ORIGIN") or "").strip()
+if _frontend_origin:
+    _CORS_ORIGINS.append(_frontend_origin)
 _extra = (os.environ.get("CORS_ORIGINS") or "").strip()
 if _extra:
     _CORS_ORIGINS = _CORS_ORIGINS + [o.strip() for o in _extra.split(",") if o.strip()]
+_origin_regex = (os.environ.get("CORS_ORIGIN_REGEX") or "").strip()
+if not _origin_regex:
+    # Allow Vercel preview/prod domains by default; override via env for tighter control.
+    _origin_regex = r"https://.*\.vercel\.app"
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_CORS_ORIGINS,
+    allow_origin_regex=_origin_regex,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=["*"],
